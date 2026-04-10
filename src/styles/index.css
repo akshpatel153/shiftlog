@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  
+  /* Color Palette */
+  --bg-color: #0f172a;           /* Deep dark slate */
+  --surface-color: #1e293b;      /* Slate 800 */
+  --surface-color-light: #334155; /* Slate 700 */
+  --border-color: #334155;       /* Slate 700 */
+  --text-primary: #f8fafc;       /* Slate 50 */
+  --text-secondary: #94a3b8;     /* Slate 400 */
+  --text-muted: #64748b;         /* Slate 500 */
+  
+  /* Status Colors */
+  --color-clocked-in: #22c55e;   /* Green */
+  --color-clocked-out: #475569;  /* Slate 600 */
+  --color-on-break: #f59e0b;     /* Amber */
+  
+  /* Action Button Colors */
+  --btn-clock-in: #16a34a;       /* Dark Green */
+  --btn-clock-in-hover: #15803d; /* Darker Green */
+  --btn-clock-out: #dc2626;      /* Red */
+  --btn-clock-out-hover: #b91c1c;/* Darker Red */
+  --btn-start-break: transparent;
+  --btn-start-break-border: #f59e0b;
+  --btn-start-break-text: #f59e0b;
+  --btn-end-break: transparent;
+  --btn-end-break-border: #3b82f6; /* Blue */
+  --btn-end-break-text: #3b82f6;
+
+  /* Misc */
+  --color-danger: #ef4444;
+  --color-danger-bg: rgba(239, 68, 68, 0.1);
+  --color-danger-border: rgba(239, 68, 68, 0.3);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-glow: 0 0 15px rgba(34, 197, 94, 0.4);
+  
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Safe areas for mobile web PWA */
+  --safe-area-bottom: env(safe-area-inset-bottom, 20px);
+  --safe-area-top: env(safe-area-inset-top, 20px);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  max-width: 600px; /* Mobile width container */
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  background-color: var(--bg-color);
+  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+
+/* Typography Utilities */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Flex Utilities */
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.gap-2 { gap: 0.5rem; }
+.gap-4 { gap: 1rem; }
+.gap-6 { gap: 1.5rem; }
+
+/* Spacing */
+.p-4 { padding: 1rem; }
+.p-6 { padding: 1.5rem; }
+.mt-4 { margin-top: 1rem; }
+.mb-4 { margin-bottom: 1rem; }
+
+/* Buttons */
+button {
+  font-family: var(--font-family);
+  cursor: pointer;
+  border: none;
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Glass panel */
+.glass-panel {
+  background: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+}
+
+/* Scrollbar hiding for cleaner look */
+::-webkit-scrollbar {
+  display: none;
+}

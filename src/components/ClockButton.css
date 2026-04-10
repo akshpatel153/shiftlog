@@ -1,0 +1,68 @@
+.clock-button {
+  width: 100%;
+  height: 60px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+.clock-button::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: white;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.clock-button:hover::after {
+  opacity: 0.1;
+}
+
+.clock-button:active {
+  transform: scale(0.96);
+}
+
+.clock-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.clock-button-clockIn {
+  background: linear-gradient(135deg, var(--btn-clock-in) 0%, var(--btn-clock-in-hover) 100%);
+  box-shadow: 0 4px 14px rgba(22, 163, 74, 0.39);
+}
+
+.clock-button-clockOut {
+  background: linear-gradient(135deg, var(--btn-clock-out) 0%, var(--btn-clock-out-hover) 100%);
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.39);
+}
+
+.clock-button-startBreak {
+  background: transparent;
+  border: 2px solid var(--btn-start-break-border);
+  color: var(--btn-start-break-text);
+}
+
+.clock-button-startBreak:hover::after {
+  background: var(--btn-start-break-border);
+  opacity: 0.1;
+}
+
+.clock-button-endBreak {
+  background: transparent;
+  border: 2px solid var(--btn-end-break-border);
+  color: var(--btn-end-break-text);
+}
+
+.clock-button-endBreak:hover::after {
+  background: var(--btn-end-break-border);
+  opacity: 0.1;
+}

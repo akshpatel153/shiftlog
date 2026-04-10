@@ -1,0 +1,65 @@
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+}
+
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.5rem 0.5rem calc(0.5rem + var(--safe-area-bottom)) 0.5rem;
+  background: rgba(30, 41, 59, 0.85); /* Slightly darker and more opaque */
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  z-index: 50;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: var(--text-muted);
+  width: 25%;
+  padding: 0.5rem 0;
+  transition: color 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nav-item span {
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  font-weight: 500;
+}
+
+.nav-item.active {
+  color: var(--color-clocked-in);
+}
+
+.nav-item.active .nav-icon-container {
+  transform: translateY(-2px);
+}
+
+.nav-icon-container {
+  position: relative;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.nav-badge {
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  width: 10px;
+  height: 10px;
+  background-color: var(--color-danger);
+  border-radius: 50%;
+  border: 2px solid var(--surface-color);
+}
