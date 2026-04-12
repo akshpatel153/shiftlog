@@ -36,7 +36,7 @@ export function WeeklyChart({ shifts }: WeeklyChartProps) {
   const gradientId = "pastelGradient";
 
   return (
-    <div className="weekly-chart-container" style={{ width: '100%', height: 260, marginTop: '2rem' }}>
+    <div className="weekly-chart-container" style={{ width: '100%', height: 260, marginTop: '2rem', pointerEvents: 'none' }}>
       <div className="chart-header" style={{ marginBottom: '1rem', paddingLeft: '0.5rem' }}>
         <h3 style={{ fontSize: '1rem', color: 'var(--color-primary)', fontWeight: 700, margin: 0 }}>This Week</h3>
         <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', margin: 0 }}>Hours worked</p>

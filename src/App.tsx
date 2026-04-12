@@ -15,6 +15,10 @@ function AppContent() {
   
   return (
     <div className="app-layout">
+      {/* Dynamic Background Blobs */}
+      <div className="blob-1"></div>
+      <div className="blob-2"></div>
+      
       <main className="main-content">
         <Routes>
           <Route path="/" element={<Navigate to="/home" replace />} />
