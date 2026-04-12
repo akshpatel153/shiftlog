@@ -36,4 +36,5 @@ export interface AppSettings {
   currency_symbol: string;       // default "$"
   pay_period: 'weekly' | 'biweekly';
   paid_breaks: boolean;
+  theme: 'light' | 'dark';
 }

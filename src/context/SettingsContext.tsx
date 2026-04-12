@@ -11,7 +11,8 @@ const defaultSettings: AppSettings = {
   hourly_rate: 15.00,
   currency_symbol: '$',
   pay_period: 'weekly',
-  paid_breaks: false
+  paid_breaks: false,
+  theme: 'light'
 };
 
 const SettingsContext = createContext<SettingsContextValue | undefined>(undefined);
@@ -24,10 +25,16 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     const stored = localStorage.getItem('@shiftlog/settings');
     if (stored) {
       try {
-        setSettings(JSON.parse(stored));
+        const parsed = JSON.parse(stored);
+        const merged = { ...defaultSettings, ...parsed }; // Ensure backwards compat for theme
+        setSettings(merged);
+        document.documentElement.setAttribute('data-theme', merged.theme);
       } catch (e) {
         console.error("Failed to parse settings", e);
+        document.documentElement.setAttribute('data-theme', defaultSettings.theme);
       }
+    } else {
+      document.documentElement.setAttribute('data-theme', defaultSettings.theme);
     }
     setIsLoaded(true);
   }, []);
@@ -36,6 +43,11 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     setSettings(prev => {
       const next = { ...prev, ...partial };
       localStorage.setItem('@shiftlog/settings', JSON.stringify(next));
+      
+      if (partial.theme) {
+        document.documentElement.setAttribute('data-theme', partial.theme);
+      }
+      
       return next;
     });
   };

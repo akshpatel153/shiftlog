@@ -25,8 +25,39 @@
   --color-error: #ba1a1a;
   --color-outline: rgba(118, 119, 125, 0.2);
   --color-outline-variant: rgba(198, 198, 205, 0.15); /* Ghost Border */
+}
 
-  /* TYPOGRAPHY */
+/* THE KINETIC MINIMALIST - DARK THEME */
+[data-theme="dark"] {
+  --color-bg: #09090b;
+  --color-surface: #09090b;
+  --color-surface-low: #18181b;
+  --color-surface-high: #27272a;
+  --color-surface-highest: #3f3f46;
+  --color-surface-lowest: #141416;
+  
+  --color-primary: #ffffff;
+  --color-primary-container: #d4d4d8;
+  --color-on-primary: #000000;
+  
+  --color-secondary: #94a3b8;
+  --color-secondary-container: #1e293b;
+  --color-on-secondary-container: #cbd5e1;
+  
+  --color-accent: #0ea5e9;  /* Vivid Sky Blue */
+  
+  --color-text: #f8fafc;
+  --color-text-muted: #94a3b8;
+  
+  --color-error: #ef4444;
+  --color-outline: rgba(255, 255, 255, 0.2);
+  --color-outline-variant: rgba(255, 255, 255, 0.05);
+
+  --shadow-ambient: 0px 12px 32px rgba(0, 0, 0, 0.5);
+  --glass-bg: rgba(20, 20, 22, 0.85);
+}
+
+:root {  /* TYPOGRAPHY */
   --font-display: 'Manrope', -apple-system, sans-serif;
   --font-body: 'Inter', -apple-system, sans-serif;
 

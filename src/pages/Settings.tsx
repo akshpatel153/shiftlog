@@ -109,6 +109,21 @@ export function Settings() {
             <span className="slider round"></span>
           </label>
         </div>
+
+        <div className="input-group toggle-group mt-4">
+          <div className="toggle-label">
+            <span className="font-semibold text-primary">Dark Mode</span>
+            <span className="text-muted block text-xs">Switch to midnight theme</span>
+          </div>
+          <label className="switch">
+            <input 
+              type="checkbox" 
+              checked={settings.theme === 'dark'}
+              onChange={e => updateSettings({ theme: e.target.checked ? 'dark' : 'light' })}
+            />
+            <span className="slider round"></span>
+          </label>
+        </div>
       </div>
 
       <div className="settings-section glass-panel mt-6">
