@@ -1,7 +1,7 @@
 .app-layout {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
   width: 100%;
 }
 
@@ -19,37 +19,75 @@
   background: var(--color-surface-lowest); 
   border-top: 1px solid var(--color-outline-variant);
   z-index: 50;
-  box-shadow: 0 -12px 32px rgba(25, 28, 30, 0.04);
+  box-shadow: 0 -12px 32px rgba(0, 0, 0, 0.04);
 }
 
 .nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-decoration: none;
-  color: var(--text-muted);
-  width: 25%;
+  color: var(--color-text-muted);
+  width: 20%;
   padding: 0.5rem 0;
   transition: color 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.nav-item span {
-  font-size: 0.75rem;
-  margin-top: 0.25rem;
-  font-weight: 500;
+.nav-item-center {
+  transform: translateY(-8px);
 }
 
 .nav-item.active {
-  color: var(--color-accent);
-}
-
-.nav-item.active .nav-icon-container {
-  transform: translateY(-2px);
+  color: var(--color-text);
 }
 
 .nav-icon-container {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Rainbow Ring Logic */
+.rainbow-ring-idle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--color-outline);
+  background: var(--color-surface-lowest);
+}
+
+.rainbow-ring-active {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  position: relative;
+  z-index: 1;
+}
+
+.rainbow-ring-active::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, #ff1053, #ff9900, #ffff00, #33cc33, #00ccff, #9933ff, #ff1053);
+  animation: spin 3s linear infinite;
+  z-index: -2;
+}
+
+.rainbow-ring-active::after {
+  content: '';
+  position: absolute;
+  inset: 4px; /* Inner cut circle for the icon */
+  border-radius: 50%;
+  background-color: var(--color-bg); 
+  z-index: -1;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
 }
 
 .nav-badge {

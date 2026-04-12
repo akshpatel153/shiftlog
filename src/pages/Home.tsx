@@ -5,7 +5,9 @@ import { ClockButton } from '../components/ClockButton';
 import { calculateBreakMinutes, calculateWorkedMinutes, calculateBreakSeconds, formatDuration, formatPay } from '../utils/timeCalc';
 import { useSettings } from '../context/SettingsContext';
 import { getBreaksForShift } from '../db/db';
-import type { Break } from '../types';
+import { fetchAllShiftsWithBreaks } from '../utils/fetchData';
+import { WeeklyChart } from '../components/WeeklyChart';
+import type { Break, ShiftWithBreaks } from '../types';
 import './Home.css';
 
 export function Home() {
@@ -14,6 +16,7 @@ export function Home() {
   
   const [showConfirm, setShowConfirm] = useState(false);
   const [breaksCache, setBreaksCache] = useState<Break[]>([]);
+  const [allShifts, setAllShifts] = useState<ShiftWithBreaks[]>([]);
 
   // We need to fetch all completed breaks if we want accurate total break time 
   // Let's use an effect or just compute it based on shift context's active_break and db fetch
@@ -24,6 +27,11 @@ export function Home() {
        setBreaksCache([]);
     }
   }, [activeShift, activeBreak]);
+
+  // Fetch all historic shifts mapping exactly like Dashboard to feed the Weekly Line Graph
+  useEffect(() => {
+    fetchAllShiftsWithBreaks(settings.hourly_rate, settings.paid_breaks).then(setAllShifts);
+  }, [settings.hourly_rate, settings.paid_breaks, activeShift]);
 
   const totalBreakMinutes = calculateBreakMinutes(breaksCache);
   const totalBreakSeconds = calculateBreakSeconds(breaksCache);
@@ -74,6 +82,10 @@ export function Home() {
         <div className="break-info-row text-muted">
           Breaks today: {breakCount} break{breakCount !== 1 ? 's' : ''} · {formatDuration(totalBreakMinutes)} total
         </div>
+      )}
+
+      {status === 'idle' && (
+        <WeeklyChart shifts={allShifts} />
       )}
 
       <div className="action-buttons-container">
