@@ -124,17 +124,6 @@ export function Settings() {
             <span className="slider round"></span>
           </label>
         </div>
-
-        <div className="input-group mt-6">
-          <label>Gemini Vision API Key</label>
-          <input 
-            type="password" 
-            placeholder="AI-\"
-            value={settings.gemini_api_key || ''}
-            onChange={e => updateSettings({ gemini_api_key: e.target.value })}
-          />
-          <p className="text-muted text-xs mt-1">Required to power receipt scanning capabilities offline.</p>
-        </div>
       </div>
 
       <div className="settings-section glass-panel mt-6">

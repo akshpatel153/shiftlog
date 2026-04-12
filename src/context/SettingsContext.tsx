@@ -12,8 +12,7 @@ const defaultSettings: AppSettings = {
   currency_symbol: '$',
   pay_period: 'weekly',
   paid_breaks: false,
-  theme: 'light',
-  gemini_api_key: ''
+  theme: 'light'
 };
 
 const SettingsContext = createContext<SettingsContextValue | undefined>(undefined);
