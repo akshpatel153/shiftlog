@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { differenceInSeconds } from 'date-fns';
 import { formatTimer, formatDuration } from '../utils/timeCalc';
+import './LiveTimer.css';
 
 interface LiveTimerProps {
   clockInTime: string | null;

@@ -39,15 +39,16 @@ export function SettingsProvider({ children }: { children: ReactNode }) {
     setIsLoaded(true);
   }, []);
 
+  useEffect(() => {
+    if (isLoaded) {
+      document.documentElement.setAttribute('data-theme', settings.theme);
+    }
+  }, [settings.theme, isLoaded]);
+
   const updateSettings = (partial: Partial<AppSettings>) => {
     setSettings(prev => {
       const next = { ...prev, ...partial };
       localStorage.setItem('@shiftlog/settings', JSON.stringify(next));
-      
-      if (partial.theme) {
-        document.documentElement.setAttribute('data-theme', partial.theme);
-      }
-      
       return next;
     });
   };
