@@ -34,7 +34,8 @@ export interface WeeklySummary {
 export interface AppSettings {
   hourly_rate: number;           // default 15.00
   currency_symbol: string;       // default "$"
-  pay_period: 'weekly' | 'biweekly';
+  pay_period: 'weekly' | 'bi-weekly' | 'monthly';
   paid_breaks: boolean;
   theme: 'light' | 'dark';
+  gemini_api_key?: string;
 }

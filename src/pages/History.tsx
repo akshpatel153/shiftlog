@@ -6,6 +6,8 @@ import { ShiftCard } from '../components/ShiftCard';
 import { startOfWeek, endOfWeek, parseISO, addDays } from 'date-fns';
 import { deleteShift, addManualShift } from '../db/db';
 import { List, Plus } from 'lucide-react';
+import { ReceiptScanner } from '../components/ReceiptScanner';
+import type { ScannedShiftData } from '../services/geminiScanner';
 import './History.css';
 
 export function History() {
@@ -35,12 +37,17 @@ export function History() {
   };
 
   const handleManualSave = async () => {
-    if (!manualDate || !manualStart || !manualEnd) return;
+    if (!manualDate || !manualStart) return;
     
     let clockInDate = new Date(`${manualDate}T${manualStart}`);
-    let clockOutDate = new Date(`${manualDate}T${manualEnd}`);
     
-    if (clockOutDate <= clockInDate) {
+    // If there is no clock out (empty string), we will default it to clockInDate plus 8 hours (or just leave it active? AI parses what it sees)
+    // Actually our DB requires a clockOutDate if it's historic, or it leaves it active.
+    // Assuming adding historic shifts always requires an end date, if missing, default to 1 min later.
+    let outTime = manualEnd || manualStart;
+    let clockOutDate = new Date(`${manualDate}T${outTime}`);
+    
+    if (manualEnd && clockOutDate <= clockInDate) {
       clockOutDate = addDays(clockOutDate, 1);
     }
 
@@ -48,6 +55,14 @@ export function History() {
     setShowManualModal(false);
     setManualDate(''); setManualStart(''); setManualEnd(''); setManualBreaks('0');
     loadData();
+  };
+
+  const handleScanSuccess = (data: ScannedShiftData) => {
+    // Fill the manual entry form with AI parsed data and show it for user verification
+    if (data.date) setManualDate(data.date);
+    if (data.clockIn) setManualStart(data.clockIn);
+    if (data.clockOut) setManualEnd(data.clockOut);
+    setShowManualModal(true);
   };
 
   // Group shifts by week
@@ -152,11 +167,14 @@ export function History() {
 
             <div className="modal-actions mt-6">
                <button className="btn-cancel" onClick={() => setShowManualModal(false)}>Cancel</button>
-               <button className="btn-confirm" disabled={!manualDate || !manualStart || !manualEnd} onClick={handleManualSave}>Save</button>
+               <button className="btn-confirm" disabled={!manualDate || !manualStart} onClick={handleManualSave}>Save</button>
             </div>
           </div>
         </div>
       )}
+
+      {/* OCR Scanner Floating Action Button */}
+      <ReceiptScanner onScanSuccess={handleScanSuccess} />
     </div>
   );
 }
