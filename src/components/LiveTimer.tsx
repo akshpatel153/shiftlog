@@ -42,7 +42,7 @@ export function LiveTimer({ clockInTime, totalBreakSeconds, isOnBreak, breakStar
 
   return (
     <div className="live-timer-container">
-      <div className={`timer-display ${status === 'idle' ? 'timer-idle' : 'timer-active'}`}>
+      <div className={`timer-display ${status === 'idle' ? 'timer-idle' : status === 'on_break' ? 'timer-on-break' : 'timer-active'}`}>
         {displayTime}
       </div>
       

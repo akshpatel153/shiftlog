@@ -3,36 +3,6 @@
   margin-bottom: 1.5rem;
 }
 
-.input-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem;
-}
-
-.input-group label {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  margin-bottom: 0.5rem;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="date"] {
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  padding: 0.75rem 1rem;
-  border-radius: var(--radius-sm);
-  font-size: 1rem;
-  font-family: inherit;
-  transition: border-color 0.2s;
-}
-
-input:focus {
-  outline: none;
-  border-color: var(--color-clocked-in);
-}
-
 .input-with-symbol {
   position: relative;
   display: flex;
@@ -65,15 +35,14 @@ input:focus {
   gap: 0.5rem;
   width: 100%;
   padding: 0.85rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
+  background: var(--color-surface-high);
+  color: var(--color-text);
   margin-bottom: 0.75rem;
   font-weight: 500;
 }
 
 .btn-export:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-surface-highest);
 }
 
 .btn-danger-outline {
@@ -138,7 +107,7 @@ input:focus {
 }
 
 input:checked + .slider {
-  background-color: var(--color-clocked-in);
+  background-color: var(--color-primary);
 }
 
 input:checked + .slider:before {

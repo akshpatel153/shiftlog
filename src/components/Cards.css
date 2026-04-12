@@ -1,17 +1,22 @@
 .card {
-  padding: 1.25rem;
+  padding: 1.5rem;
   transition: transform 0.2s, box-shadow 0.2s;
+  background: var(--color-surface-lowest);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-ambient);
+  border: none;
 }
 
 .shift-card {
   cursor: pointer;
   margin-bottom: 1rem;
+  /* Left accent bar */
+  box-shadow: inset 4px 0 0 0 var(--color-primary), var(--shadow-ambient);
 }
 
 .shift-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
-  border-color: rgba(255, 255, 255, 0.15);
+  box-shadow: inset 6px 0 0 0 var(--color-primary), 0 16px 40px rgba(25, 28, 30, 0.08);
 }
 
 .shift-card:active {
@@ -26,32 +31,38 @@
 }
 
 .shift-date {
-  font-size: 1.1rem;
-  color: var(--text-primary);
+  font-size: 1.125rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-primary);
 }
 
 .shift-time-range {
-  font-size: 0.95rem;
-  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
 }
 
 .shift-stats {
   display: flex;
-  border-top: 1px solid var(--border-color);
-  padding-top: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-outline-variant);
 }
 
 .stat-label {
-  font-size: 0.8rem;
-  color: var(--text-muted);
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
 }
 
 .stat-value {
-  font-size: 1rem;
+  font-size: 1.125rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--color-text);
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
 }
 
 .align-right {
@@ -60,7 +71,7 @@
 }
 
 .highlight {
-  color: var(--color-clocked-in);
+  color: var(--color-accent);
 }
 
 .summary-card {
@@ -73,25 +84,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.5rem;
 }
 
 .summary-label {
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
 }
 
 .summary-icon {
-  color: var(--text-muted);
-  opacity: 0.7;
+  color: var(--color-text-muted);
+  opacity: 0.5;
 }
 
 .summary-value {
-  font-size: 1.75rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-primary);
 }
-
-.text-color-green .summary-value { color: var(--color-clocked-in); }
-.text-color-amber .summary-value { color: var(--color-on-break); }
-.text-color-blue .summary-value { color: #3b82f6; }

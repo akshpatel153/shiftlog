@@ -20,15 +20,7 @@
   flex-direction: column;
 }
 
-.auth-error {
-  background-color: rgba(239, 68, 68, 0.2);
-  color: #f87171;
-  border-radius: 8px;
-  padding: 0.75rem;
-  font-size: 0.875rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
+
 
 .w-full {
   width: 100%;

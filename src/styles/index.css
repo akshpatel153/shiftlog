@@ -1,67 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
 
 :root {
-  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  /* THE KINETIC MINIMALIST - COLOR SYSTEM */
+  --color-bg: #f7f9fb;
+  --color-surface: #f7f9fb;
+  --color-surface-low: #f2f4f6;
+  --color-surface-high: #e6e8ea;
+  --color-surface-highest: #e0e3e5;
+  --color-surface-lowest: #ffffff;
   
-  /* Color Palette */
-  --bg-color: #0f172a;           /* Deep dark slate */
-  --surface-color: #1e293b;      /* Slate 800 */
-  --surface-color-light: #334155; /* Slate 700 */
-  --border-color: #334155;       /* Slate 700 */
-  --text-primary: #f8fafc;       /* Slate 50 */
-  --text-secondary: #94a3b8;     /* Slate 400 */
-  --text-muted: #64748b;         /* Slate 500 */
+  --color-primary: #000000;
+  --color-primary-container: #131b2e;
+  --color-on-primary: #ffffff;
   
-  /* Status Colors */
-  --color-clocked-in: #22c55e;   /* Green */
-  --color-clocked-out: #475569;  /* Slate 600 */
-  --color-on-break: #f59e0b;     /* Amber */
+  --color-secondary: #515f74;
+  --color-secondary-container: #d5e3fc;
+  --color-on-secondary-container: #57657a;
   
-  /* Action Button Colors */
-  --btn-clock-in: #16a34a;       /* Dark Green */
-  --btn-clock-in-hover: #15803d; /* Darker Green */
-  --btn-clock-out: #dc2626;      /* Red */
-  --btn-clock-out-hover: #b91c1c;/* Darker Red */
-  --btn-start-break: transparent;
-  --btn-start-break-border: #f59e0b;
-  --btn-start-break-text: #f59e0b;
-  --btn-end-break: transparent;
-  --btn-end-break-border: #3b82f6; /* Blue */
-  --btn-end-break-text: #3b82f6;
+  --color-accent: #008cc7;  /* On-Tertiary-Container */
+  
+  --color-text: #191c1e;
+  --color-text-muted: #45464d;
+  
+  --color-error: #ba1a1a;
+  --color-outline: rgba(118, 119, 125, 0.2);
+  --color-outline-variant: rgba(198, 198, 205, 0.15); /* Ghost Border */
 
-  /* Misc */
-  --color-danger: #ef4444;
-  --color-danger-bg: rgba(239, 68, 68, 0.1);
-  --color-danger-border: rgba(239, 68, 68, 0.3);
+  /* TYPOGRAPHY */
+  --font-display: 'Manrope', -apple-system, sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
 
-  /* Shadows */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  --shadow-glow: 0 0 15px rgba(34, 197, 94, 0.4);
-  
-  /* Radii */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
-  --radius-full: 9999px;
+  /* ELEVATION & EFFECTS */
+  --shadow-ambient: 0px 12px 32px rgba(25, 28, 30, 0.06);
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-blur: blur(24px);
 
-  /* Safe areas for mobile web PWA */
-  --safe-area-bottom: env(safe-area-inset-bottom, 20px);
-  --safe-area-top: env(safe-area-inset-top, 20px);
+  --radius-sm: 0.375rem; 
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
 }
 
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
 
 body {
-  font-family: var(--font-family);
-  background-color: var(--bg-color);
-  color: var(--text-primary);
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
@@ -77,15 +65,24 @@ body {
   margin: 0 auto;
   width: 100%;
   position: relative;
-  background-color: var(--bg-color);
-  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+  background-color: var(--color-bg);
+  box-shadow: 0 0 40px rgba(0,0,0,0.03); /* Soft shadow for desktop framing */
 }
 
 /* Typography Utilities */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
-  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-top: 0;
+  letter-spacing: -0.02em;
 }
+
+.text-muted { color: var(--color-text-muted); }
+.font-semibold { font-weight: 600; }
+.text-primary { color: var(--color-primary); }
+.text-accent { color: var(--color-accent); }
+.highlight { color: var(--color-accent); font-weight: 600; }
 
 /* Flex Utilities */
 .flex { display: flex; }
@@ -103,12 +100,12 @@ h1, h2, h3, h4, h5, h6 {
 .mt-4 { margin-top: 1rem; }
 .mb-4 { margin-bottom: 1rem; }
 
-/* Buttons */
+/* Global Buttons */
 button {
-  font-family: var(--font-family);
+  font-family: var(--font-body);
   cursor: pointer;
   border: none;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   transition: all 0.2s ease;
 }
 
@@ -121,16 +118,72 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* Glass panel */
+/* Base button primary styles */
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+}
+.btn-primary:hover {
+  background: var(--color-primary-container);
+}
+
+/* Glass panel equivalent -> Floating Paper */
 .glass-panel {
-  background: rgba(30, 41, 59, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--color-surface-lowest);
+  box-shadow: var(--shadow-ambient);
   border-radius: var(--radius-lg);
 }
 
 /* Scrollbar hiding for cleaner look */
 ::-webkit-scrollbar {
   display: none;
+}
+
+/* Global Form Primitives: Soft Box / Underline */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="password"],
+input[type="email"] {
+  background: var(--color-surface-highest);
+  border: none;
+  border-bottom: 1px solid var(--color-outline);
+  color: var(--color-text);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  transition: border-color 0.2s;
+}
+
+input:focus {
+  outline: none;
+  border-bottom: 2px solid var(--color-primary);
+  background: var(--color-surface-high);
+}
+
+.auth-error {
+  color: var(--color-error);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
 }
