@@ -95,7 +95,7 @@ export function Settings() {
           />
         </div>
 
-        <div className="input-group toggle-group mt-4">
+        <div className="toggle-group mt-4">
           <div className="toggle-label">
             <span className="font-semibold text-primary">Paid Breaks</span>
             <span className="text-muted block text-xs">Break time counts towards estimated pay</span>
@@ -110,7 +110,7 @@ export function Settings() {
           </label>
         </div>
 
-        <div className="input-group toggle-group mt-4">
+        <div className="toggle-group mt-4">
           <div className="toggle-label">
             <span className="font-semibold text-primary">Dark Mode</span>
             <span className="text-muted block text-xs">Switch to midnight theme</span>
