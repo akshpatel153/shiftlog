@@ -70,7 +70,7 @@ export function History() {
           <h1 className="page-title"><List className="icon" style={{display:'inline-block'}} /> History</h1>
           <p className="text-muted">Review your past shifts</p>
         </div>
-        <button className="btn-icon" onClick={() => setShowManualModal(true)} style={{ background: 'var(--color-primary)', color: '#fff', borderRadius: '50%', padding: '0.5rem', border: 'none', display: 'flex', cursor: 'pointer' }}>
+        <button className="btn-icon" onClick={() => setShowManualModal(true)} style={{ background: 'var(--color-primary)', color: 'var(--color-on-primary)', borderRadius: '50%', padding: '0.5rem', border: 'none', display: 'flex', cursor: 'pointer' }}>
           <Plus size={24} />
         </button>
       </header>
@@ -104,10 +104,10 @@ export function History() {
           <div className="glass-panel modal-content bottom-sheet" onClick={e => e.stopPropagation()}>
             <div className="bottom-sheet-drag"></div>
             <h2>Shift Details</h2>
-            <div className="modal-summary mt-4">
-              <div><strong>Date:</strong> {new Date(selectedShift.clock_in).toLocaleDateString()}</div>
-              <div><strong>In:</strong> {new Date(selectedShift.clock_in).toLocaleTimeString()}</div>
-              <div><strong>Out:</strong> {selectedShift.clock_out ? new Date(selectedShift.clock_out).toLocaleTimeString() : 'Ongoing'}</div>
+            <div className="modal-summary mt-4" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2rem' }}>
+              <div className="flex-col"><span className="text-muted text-xs mb-1" style={{fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.05em'}}>DATE</span><span className="font-semibold" style={{fontSize: '1.1rem'}}>{new Date(selectedShift.clock_in).toLocaleDateString()}</span></div>
+              <div className="flex-col"><span className="text-muted text-xs mb-1" style={{fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.05em'}}>IN</span><span className="font-semibold" style={{fontSize: '1.1rem'}}>{new Date(selectedShift.clock_in).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span></div>
+              <div className="flex-col"><span className="text-muted text-xs mb-1" style={{fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.05em'}}>OUT</span><span className="font-semibold" style={{fontSize: '1.1rem'}}>{selectedShift.clock_out ? new Date(selectedShift.clock_out).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : 'Ongoing'}</span></div>
             </div>
             
             <h3 className="mt-6 mb-2">Breaks ({selectedShift.breaks.length})</h3>
