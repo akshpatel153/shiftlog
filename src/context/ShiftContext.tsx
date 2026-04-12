@@ -107,7 +107,7 @@ export function ShiftProvider({ children }: { children: ReactNode }) {
       try {
         await dbEndBreak(activeBreak.id, activeShift.id);
         setActiveShift({ ...activeShift, status: 'active' });
-        setActiveBreak({ ...activeBreak, end_time: new Date().toISOString() });
+        setActiveBreak(null);
       } catch (e) {
         console.error(e);
         await refreshActiveShift();
