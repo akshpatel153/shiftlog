@@ -6,6 +6,7 @@ import { Dashboard } from './pages/Dashboard';
 import { History } from './pages/History';
 import { Settings } from './pages/Settings';
 import { Auth } from './pages/Auth';
+import { Onboarding } from './pages/Onboarding';
 import { useShift, ShiftProvider } from './context/ShiftContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import './App.css';
@@ -82,6 +83,13 @@ function ProtectedApp() {
 
   if (!user) {
     return <Auth />;
+  }
+
+  // Check if they need onboarding (e.g. they signed up with Google and lack employee code metadata)
+  const needsOnboarding = !user.user_metadata?.employee_code;
+
+  if (needsOnboarding) {
+    return <Onboarding />;
   }
 
   return (

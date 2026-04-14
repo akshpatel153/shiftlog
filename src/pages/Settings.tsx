@@ -9,8 +9,11 @@ import './Settings.css';
 
 export function Settings() {
   const { settings, updateSettings, resetData } = useSettings();
-  const { signOut } = useAuth();
+  const { signOut, user } = useAuth();
   const [rateInput, setRateInput] = useState(settings.hourly_rate.toString());
+
+  const profile = user?.user_metadata || {};
+  const fullName = profile.first_name ? `${profile.first_name} ${profile.last_name || ''}` : (profile.full_name || 'Team Member');
   
   // Date range picker defaults to this week
   const today = new Date();
@@ -66,6 +69,18 @@ export function Settings() {
   return (
     <div className="page-container settings-page">
       <h2 className="page-title">Settings</h2>
+
+      <div className="settings-section glass-panel" style={{ background: 'var(--color-primary)', color: 'var(--color-on-primary)', marginBottom: '1.5rem', border: 'none' }}>
+        <h3 className="section-title" style={{ color: 'var(--color-on-primary)', opacity: 0.9 }}>Logged In Profile</h3>
+        <div className="mt-4" style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+          <div style={{ fontSize: '1.25rem', fontWeight: 600 }}>{fullName}</div>
+          <div style={{ fontSize: '0.85rem', opacity: 0.9 }}>{user?.email}</div>
+          <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem', opacity: 0.85, fontSize: '0.85rem' }}>
+            {profile.employee_code && <span>Code: {profile.employee_code}</span>}
+            {profile.dob && <span>DOB: {new Date(profile.dob).toLocaleDateString()}</span>}
+          </div>
+        </div>
+      </div>
       
       <div className="settings-section glass-panel">
         <h3 className="section-title">Pay Settings</h3>

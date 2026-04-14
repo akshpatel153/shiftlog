@@ -3,6 +3,7 @@ import { useShift } from '../context/ShiftContext';
 import { LiveTimer } from '../components/LiveTimer';
 import { ClockButton } from '../components/ClockButton';
 import { calculateBreakMinutes, calculateWorkedMinutes, calculateBreakSeconds, formatDuration, formatPay } from '../utils/timeCalc';
+import { useAuth } from '../context/AuthContext';
 import { useSettings } from '../context/SettingsContext';
 import { getBreaksForShift } from '../db/db';
 import { fetchAllShiftsWithBreaks } from '../utils/fetchData';
@@ -13,6 +14,9 @@ import './Home.css';
 export function Home() {
   const { activeShift, activeBreak, clockIn, clockOut, startBreak, endBreak } = useShift();
   const { settings } = useSettings();
+  const { user } = useAuth();
+  
+  const firstName = user?.user_metadata?.first_name || 'Team';
   
   const [showConfirm, setShowConfirm] = useState(false);
   const [breaksCache, setBreaksCache] = useState<Break[]>([]);
@@ -61,8 +65,11 @@ export function Home() {
 
   return (
     <div className="page-container page-home">
-      <header className="home-header">
-        <h1 className="logo-text">ShiftLog</h1>
+      <header className="home-header" style={{ alignItems: 'flex-start' }}>
+        <div>
+          <h1 className="logo-text">Welcome, {firstName}</h1>
+          <div style={{fontSize: '0.85rem', color: 'var(--color-primary)', fontWeight: 600, marginTop: '2px'}}>ShiftLog</div>
+        </div>
         <span className="header-date">{dateNow}</span>
       </header>
 
