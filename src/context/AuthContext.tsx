@@ -17,23 +17,42 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isMounted = true;
+    
+    // Failsafe strictly for production Vercel environments where getSession can silently hang
+    const failsafe = setTimeout(() => {
+      if (isMounted) setLoading(false);
+    }, 2500);
+
     // Get initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session);
-      setUser(session?.user ?? null);
-      setLoading(false);
+    supabase.auth.getSession().then(({ data: { session }, error }) => {
+      if (error) throw error;
+      if (isMounted) {
+        setSession(session);
+        setUser(session?.user ?? null);
+      }
+    }).catch(console.error).finally(() => {
+      if (isMounted) {
+        setLoading(false);
+        clearTimeout(failsafe);
+      }
     });
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, session) => {
-        setSession(session);
-        setUser(session?.user ?? null);
-        setLoading(false);
+        if (isMounted) {
+          setSession(session);
+          setUser(session?.user ?? null);
+          setLoading(false);
+          clearTimeout(failsafe);
+        }
       }
     );
 
     return () => {
+      isMounted = false;
+      clearTimeout(failsafe);
       subscription.unsubscribe();
     };
   }, []);
@@ -51,7 +70,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 }

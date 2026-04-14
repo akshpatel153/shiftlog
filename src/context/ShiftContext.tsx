@@ -43,19 +43,26 @@ export function ShiftProvider({ children }: { children: ReactNode }) {
   };
 
   const refreshActiveShift = async () => {
-    let currentShift = await getActiveShift();
-    if (currentShift) {
-       currentShift = await checkStaleShift(currentShift);
-    }
-    
-    setActiveShift(currentShift);
-    if (currentShift && currentShift.id) {
-      const b = await getActiveBreak(currentShift.id);
-      setActiveBreak(b);
-    } else {
+    try {
+      let currentShift = await getActiveShift();
+      if (currentShift) {
+         currentShift = await checkStaleShift(currentShift);
+      }
+      
+      setActiveShift(currentShift);
+      if (currentShift && currentShift.id) {
+        const b = await getActiveBreak(currentShift.id);
+        setActiveBreak(b);
+      } else {
+        setActiveBreak(null);
+      }
+    } catch (e) {
+      console.error("Failed to load active shift data:", e);
+      setActiveShift(null);
       setActiveBreak(null);
+    } finally {
+      setIsReady(true);
     }
-    setIsReady(true);
   };
 
   useEffect(() => {
