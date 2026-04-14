@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { differenceInSeconds } from 'date-fns';
-import { formatTimer, formatDuration } from '../utils/timeCalc';
+import { formatTimer, formatDuration, formatPay } from '../utils/timeCalc';
 import './LiveTimer.css';
 
 interface LiveTimerProps {
@@ -9,9 +9,11 @@ interface LiveTimerProps {
   isOnBreak: boolean;
   breakStartTime: string | null;
   status: 'active' | 'on_break' | 'idle';
+  hourlyRate?: number;
+  currencySymbol?: string;
 }
 
-export function LiveTimer({ clockInTime, totalBreakSeconds, isOnBreak, breakStartTime, status }: LiveTimerProps) {
+export function LiveTimer({ clockInTime, totalBreakSeconds, isOnBreak, breakStartTime, status, hourlyRate, currencySymbol }: LiveTimerProps) {
   const [, forceUpdate] = useState(0);
 
   useEffect(() => {
@@ -40,6 +42,7 @@ export function LiveTimer({ clockInTime, totalBreakSeconds, isOnBreak, breakStar
   
   const displayTime = status === 'idle' ? "00:00:00" : formatTimer(workedSeconds);
   const workedMinutes = Math.floor(workedSeconds / 60);
+  const estimatedPay = (hourlyRate != null && currencySymbol) ? formatPay((workedSeconds / 3600) * hourlyRate, currencySymbol) : null;
 
   return (
     <div className="live-timer-container">
@@ -49,7 +52,8 @@ export function LiveTimer({ clockInTime, totalBreakSeconds, isOnBreak, breakStar
       
       {status !== 'idle' && (
         <div className="timer-subtext">
-          {formatDuration(workedMinutes)} worked
+          <span>{formatDuration(workedMinutes)} worked</span>
+          {estimatedPay && <span className="timer-pay-split"> · <span className="highlight-pay">{estimatedPay}</span> earned</span>}
         </div>
       )}
 

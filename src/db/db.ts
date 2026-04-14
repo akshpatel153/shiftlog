@@ -155,7 +155,7 @@ export async function deleteShift(shiftId: number) {
   if (error) throw error;
 }
 
-export async function addManualShift(clockIn: string, clockOut: string, breakMinutes: number) {
+export async function addManualShift(clockIn: string, clockOut: string, breakMinutes: number, notes?: string) {
   const userId = await getUserId();
   
   const { data, error: shiftError } = await supabase
@@ -165,7 +165,7 @@ export async function addManualShift(clockIn: string, clockOut: string, breakMin
       clock_in: clockIn,
       clock_out: clockOut,
       status: 'completed',
-      notes: 'Manual entry'
+      notes: notes || 'Manual entry'
     })
     .select()
     .single();

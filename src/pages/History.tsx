@@ -17,6 +17,7 @@ export function History() {
   const [manualStart, setManualStart] = useState('');
   const [manualEnd, setManualEnd] = useState('');
   const [manualBreaks, setManualBreaks] = useState('0');
+  const [manualRole, setManualRole] = useState('');
 
   const loadData = () => {
     fetchAllShiftsWithBreaks(settings.hourly_rate, settings.paid_breaks).then(setShifts);
@@ -44,9 +45,9 @@ export function History() {
       clockOutDate = addDays(clockOutDate, 1);
     }
 
-    await addManualShift(clockInDate.toISOString(), clockOutDate.toISOString(), parseInt(manualBreaks) || 0);
+    await addManualShift(clockInDate.toISOString(), clockOutDate.toISOString(), parseInt(manualBreaks) || 0, manualRole);
     setShowManualModal(false);
-    setManualDate(''); setManualStart(''); setManualEnd(''); setManualBreaks('0');
+    setManualDate(''); setManualStart(''); setManualEnd(''); setManualBreaks('0'); setManualRole('');
     loadData();
   };
 
@@ -103,7 +104,10 @@ export function History() {
         <div className="modal-overlay" onClick={() => setSelectedShift(null)}>
           <div className="glass-panel modal-content bottom-sheet" onClick={e => e.stopPropagation()}>
             <div className="bottom-sheet-drag"></div>
-            <h2>Shift Details</h2>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <h2>Shift Details</h2>
+              {selectedShift.notes && <span className="role-badge" style={{ marginBottom: '1.5rem' }}>{selectedShift.notes}</span>}
+            </div>
             <div className="modal-summary mt-4" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2rem' }}>
               <div className="flex-col"><span className="text-muted text-xs mb-1" style={{fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.05em'}}>DATE</span><span className="font-semibold" style={{fontSize: '1.1rem'}}>{new Date(selectedShift.clock_in).toLocaleDateString()}</span></div>
               <div className="flex-col"><span className="text-muted text-xs mb-1" style={{fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.05em'}}>IN</span><span className="font-semibold" style={{fontSize: '1.1rem'}}>{new Date(selectedShift.clock_in).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span></div>
@@ -143,6 +147,11 @@ export function History() {
                 <label>Clock Out</label>
                 <input type="time" value={manualEnd} onChange={e => setManualEnd(e.target.value)} />
               </div>
+            </div>
+
+            <div className="input-group mt-4">
+              <label>Job Role (Optional)</label>
+              <input type="text" value={manualRole} onChange={e => setManualRole(e.target.value)} placeholder="e.g. Barista" maxLength={40} />
             </div>
 
             <div className="input-group mt-4">

@@ -18,7 +18,10 @@ export function ShiftCard({ shift, currencySymbol, onPress }: ShiftCardProps) {
   return (
     <div className="glass-panel card shift-card" onClick={onPress} role="button" tabIndex={0}>
       <div className="shift-card-header">
-        <h4 className="shift-date">{formatDateFull(shift.clock_in)}</h4>
+        <div className="flex items-center gap-2">
+          <h4 className="shift-date">{formatDateFull(shift.clock_in)}</h4>
+          {shift.notes && <span className="role-badge">{shift.notes}</span>}
+        </div>
         <ChevronRight size={20} className="text-muted" />
       </div>
       <div className="shift-time-range text-secondary">
