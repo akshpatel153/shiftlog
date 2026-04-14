@@ -17,7 +17,6 @@ export function Home() {
   const [showConfirm, setShowConfirm] = useState(false);
   const [breaksCache, setBreaksCache] = useState<Break[]>([]);
   const [allShifts, setAllShifts] = useState<ShiftWithBreaks[]>([]);
-  const [jobRole, setJobRole] = useState('');
 
   // We need to fetch all completed breaks if we want accurate total break time 
   // Let's use an effect or just compute it based on shift context's active_break and db fetch
@@ -34,8 +33,9 @@ export function Home() {
     fetchAllShiftsWithBreaks(settings.hourly_rate, settings.paid_breaks).then(setAllShifts);
   }, [settings.hourly_rate, settings.paid_breaks, activeShift]);
 
+  const completedBreaks = breaksCache.filter(b => b.end_time !== null);
   const totalBreakMinutes = calculateBreakMinutes(breaksCache);
-  const totalBreakSeconds = calculateBreakSeconds(breaksCache);
+  const totalBreakSeconds = calculateBreakSeconds(completedBreaks);
   const workedMinutes = activeShift ? calculateWorkedMinutes(activeShift, breaksCache) : 0;
   const breakCount = breaksCache.length;
 
@@ -93,17 +93,7 @@ export function Home() {
 
       <div className="action-buttons-container">
         {status === 'idle' && (
-          <div className="clock-in-wrapper">
-            <input 
-              type="text" 
-              className="role-input" 
-              placeholder="What are you working on? (Optional Job Role)"
-              value={jobRole}
-              onChange={e => setJobRole(e.target.value)}
-              maxLength={40}
-            />
-            <ClockButton label="Clock In" variant="clockIn" onPress={() => clockIn(jobRole || null)} />
-          </div>
+          <ClockButton label="Clock In" variant="clockIn" onPress={() => clockIn()} />
         )}
         
         {status !== 'idle' && (

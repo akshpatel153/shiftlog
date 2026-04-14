@@ -104,11 +104,11 @@ export function History() {
         <div className="modal-overlay" onClick={() => setSelectedShift(null)}>
           <div className="glass-panel modal-content bottom-sheet" onClick={e => e.stopPropagation()}>
             <div className="bottom-sheet-drag"></div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <h2>Shift Details</h2>
-              {selectedShift.notes && <span className="role-badge" style={{ marginBottom: '1.5rem' }}>{selectedShift.notes}</span>}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+              <h2 style={{ margin: 0 }}>Shift Details</h2>
+              {selectedShift.notes && <span className="role-badge" style={{ margin: 0 }}>{selectedShift.notes}</span>}
             </div>
-            <div className="modal-summary mt-4" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '2rem' }}>
+            <div className="modal-summary" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginBottom: '2rem' }}>
               <div className="flex-col"><span className="text-muted text-xs mb-1" style={{fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.05em'}}>DATE</span><span className="font-semibold" style={{fontSize: '1.1rem'}}>{new Date(selectedShift.clock_in).toLocaleDateString()}</span></div>
               <div className="flex-col"><span className="text-muted text-xs mb-1" style={{fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.05em'}}>IN</span><span className="font-semibold" style={{fontSize: '1.1rem'}}>{new Date(selectedShift.clock_in).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span></div>
               <div className="flex-col"><span className="text-muted text-xs mb-1" style={{fontSize: '0.75rem', fontWeight: 600, letterSpacing: '0.05em'}}>OUT</span><span className="font-semibold" style={{fontSize: '1.1rem'}}>{selectedShift.clock_out ? new Date(selectedShift.clock_out).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : 'Ongoing'}</span></div>

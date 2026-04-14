@@ -110,7 +110,7 @@
   width: 20px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: var(--color-on-primary);
   transition: .4s;
 }
 
