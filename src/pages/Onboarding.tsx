@@ -60,15 +60,13 @@ export function Onboarding() {
         {error && <div className="auth-error">{error}</div>}
 
         <form onSubmit={handleSubmit} className="auth-form">
-          <div className="input-group" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-            <div>
-              <label>First Name</label>
-              <input type="text" required value={firstName} onChange={e => setFirstName(e.target.value)} />
-            </div>
-            <div>
-              <label>Last Name</label>
-              <input type="text" required value={lastName} onChange={e => setLastName(e.target.value)} />
-            </div>
+          <div className="input-group mt-4">
+            <label>First Name</label>
+            <input type="text" required value={firstName} onChange={e => setFirstName(e.target.value)} />
+          </div>
+          <div className="input-group mt-4">
+            <label>Last Name</label>
+            <input type="text" required value={lastName} onChange={e => setLastName(e.target.value)} />
           </div>
           
           <div className="input-group mt-4">
